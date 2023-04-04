@@ -60,6 +60,35 @@ exports.exploreRecipe = async(req, res) => {
 }
 
 
+/**
+ * Post /Search
+ * Search
+ */
+exports.searchRecipe = async(req, res) => {
+    try{
+
+        let searchTerm= req.body.searchTerm;
+        let recipe = await Recipe.find( { $text: {$search: searchTerm, $diacriticSensitive: true} } );
+        res.render('search', {title: 'Cooking Blog-Search', recipe});
+    } catch (error) {
+        res.status(500).send({message : error.message|| "Error Occured"});
+    }    
+ 
+}
+
+/**
+ * get /Submit
+ * Submit
+ */
+exports.submitRecipe = async(req, res) =>{
+    res.render('submit-recipe', {title: 'Cooking Blog - Submit Recipe'});
+}
+
+
+
+
+
+
 
 
 
@@ -101,41 +130,41 @@ exports.exploreRecipe = async(req, res) => {
 // insertDymmyCategoryData();
 
 
-async function insertDymmyRecipeData(){
+// async function insertDymmyRecipeData(){
 
-    try{
-        await Recipe.insertMany([
-            {
-                "name":"Idly",
-                "description":`grind rice flour, Urud dall, Fenugreek seed; ferment for one to twodays`,
-                "email":"itismissing@gmail.com",
-                "ingredients":[
-                    "rice flour",
-                    "Urud dhal",
-                    "Fenugreek seed"
-                ],
-                "category":"Indian",
-                "image":"Idly.png"
-            },
-            {
-                "name":"Dosai",
-                "description":`grind rice flour, Urud dhal, Fenugreek seed; ferment for one to twodays`,
-                "email":"itismissing@gmail.com",
-                "ingredients":[
-                    "rice flour",
-                    "Urud dhal",
-                    "Fenugreek seed"
-                ],
-                "category":"Indian",
-                "image":"Dosai.png"
-            },
+//     try{
+//         await Recipe.insertMany([
+//             {
+//                 "name":"Idly",
+//                 "description":`grind rice flour, Urud dall, Fenugreek seed; ferment for one to twodays`,
+//                 "email":"itismissing@gmail.com",
+//                 "ingredients":[
+//                     "rice flour",
+//                     "Urud dhal",
+//                     "Fenugreek seed"
+//                 ],
+//                 "category":"Indian",
+//                 "image":"Idly.png"
+//             },
+//             {
+//                 "name":"Dosai",
+//                 "description":`grind rice flour, Urud dhal, Fenugreek seed; ferment for one to twodays`,
+//                 "email":"itismissing@gmail.com",
+//                 "ingredients":[
+//                     "rice flour",
+//                     "Urud dhal",
+//                     "Fenugreek seed"
+//                 ],
+//                 "category":"Indian",
+//                 "image":"Dosai.png"
+//             },
             
-          ]);
+//           ]);
 
-    }catch(error){
-        console.log('err', + error)
-    }
-}
+//     }catch(error){
+//         console.log('err', + error)
+//     }
+// }
 
-insertDymmyRecipeData();
+// insertDymmyRecipeData();
 
