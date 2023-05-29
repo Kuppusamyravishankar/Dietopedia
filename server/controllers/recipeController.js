@@ -81,7 +81,38 @@ exports.searchRecipe = async(req, res) => {
  * Submit
  */
 exports.submitRecipe = async(req, res) =>{
-    res.render('submit-recipe', {title: 'Cooking Blog - Submit Recipe'});
+    const infoErrorsObj = req.flash('infoErrors');
+    const infoSubmitObj = req.flash('infoSubmit');
+    res.render('submit-recipe', {title: 'Cooking Blog - Submit Recipe',infoErrorsObj, infoSubmitObj });
+}
+
+/**
+ * get /Submit on Post
+ * Submit
+ */
+exports.submitRecipeOnPost = async(req, res) =>{
+
+    try {
+
+        const newRecipe =new Recipe({
+            name: 'New Chocolate Cake',
+            description: 'Chocolate Cake description',
+            email : 'itismissing@gmail.com',
+            ingredients : 'water',
+            category : 'Mexican',
+            image:'Mexican-food.png'
+        });
+
+        await newRecipe.save();
+
+
+        req.flash('infoSubmit','Recipe has been Added')
+        res.redirect('/submit-recipe');
+    } catch (error) {
+        req.flash('infoErrors',error)
+        res.redirect('submit-recipe')
+    }
+
 }
 
 

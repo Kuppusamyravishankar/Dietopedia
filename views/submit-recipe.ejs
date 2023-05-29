@@ -1,9 +1,22 @@
 <div class="px-4 py-5 my-5 text-center">
     <h1 class="display-5 fw-bold"> Submit Your Recipe</h1>
     <div class="col-lg-6 mx-auto">
-        <p class="lead">Share your own recipe for us to understand the nutrician intake accurate</p>
+        <p class="lead">Share your own recipe</p>
     </div>
 </div>
+
+<% if(infoSubmitObj !='') { %>
+<div class="col-12 alert alert-success" role="alert">
+    <%= infoSubmitObj %>
+  </div>
+<% } %>  
+
+
+<% if(infoErrorsObj !='') { %>
+<div class="col-12 alert alert-danger" role="alert">
+    <%= infoErrorsObj %>
+  </div>
+<% } %>  
 
 <div class="row justify-content-center">
     <div class="col-8">
@@ -61,15 +74,9 @@
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Submit Recipe</button>
-
                 </div>
-
+                
             </div>
-
-
-
-
-
         </form>
 
     </div>
