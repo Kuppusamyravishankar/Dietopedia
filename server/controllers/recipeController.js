@@ -17,7 +17,7 @@ exports.homepage = async(req, res) => {
 
         const food ={latest, Indian};
 
-        res.render('index', { title: 'Cooking Blog - Homepage', categories, food });
+        res.render('index', { title: 'Cooking  - Homepage', categories, food });
     } catch (error) {
         res.status(500).send({message : error.message|| "Error Occured"});
     }    
